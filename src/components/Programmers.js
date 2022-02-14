@@ -11,59 +11,56 @@ We can only feature one awesome programmer at a time.
 Find comments below to help you along.
 */
 
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 // Use this variable ONLY to initialize a slice of state!
 // There is something in the JSX right now breaking this rule...
 export const listOfAwesome = [
-  { id: '1', name: 'Ada Lovelace' },
-  { id: '2', name: 'Grace Hopper' },
-  { id: '3', name: 'Evelyn Boyd Granville' },
-  { id: '4', name: 'Mary Kenneth Keller' },
-  { id: '5', name: 'Frances Allen' },
-  { id: '6', name: 'Carol Shaw' },
+  { id: "1", name: "Ada Lovelace" },
+  { id: "2", name: "Grace Hopper" },
+  { id: "3", name: "Evelyn Boyd Granville" },
+  { id: "4", name: "Mary Kenneth Keller" },
+  { id: "5", name: "Frances Allen" },
+  { id: "6", name: "Carol Shaw" },
 ];
 
 export default function Programmers() {
-  // We'll have to use the state hook twice, as we need two slices of state.
-  // The programmers list on the one hand, and the id of the featured programmer on the other.
-  const [programmers, setProgrammers] = useState(listOfAwesome)
-  const [featured, setFeatured] = useState(null)
+  const [programmers, setProgrammers] = useState(listOfAwesome);
+  const [featured, setFeatured] = useState(null);
 
   const getNameOfFeatured = () => {
-    // Leave this for last!
-    // This is NOT an event handler but a helper function. See its usage inside the JSX.
-    // It's going to utilize both slices of state to return the _name_ of the featured dev.
-    // The beauty of closures is that we can "see" both slices of state from this region
-    // of the program, without needing to inject the information through arguments.
+   
+   const programmerName = programmers.find(name => name.id === featured);
+   return programmerName
   };
 
   const style = {
-    fontSize: '1.5em',
-    marginTop: '0.5em',
-    color: 'royalblue', 
+    fontSize: "1.5em",
+    marginTop: "0.5em",
+    color: "royalblue",
   };
 
   return (
-    <div className='widget-programmers container'>
+    <div className="widget-programmers container">
       <h2>Programmers</h2>
-      <div className='programmers'>
-        {
-         
-          programmers.map(dev =>
-            <div className='programmer' key={dev.id}>
-              {dev.name} <button onClick={() => { setFeatured(dev.id) }}>Feature</button>
-            </div>
-          )
-        }
+      <div className="programmers">
+        {programmers.map((dev) => (
+          <div className="programmer" key={dev.id}>
+            {dev.name}{" "}
+            <button
+              onClick={() => {
+                setFeatured(dev.id);
+              }}
+            >
+              Feature
+            </button>
+          </div>
+        ))}
       </div>
-      <div id='featured' style={style}>
-        {
-          
-          featured
-            ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳`
-            : 'Pick an awesome programmer'
-        }
+      <div id="featured" style={style}>
+        {featured
+          ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳`
+          : "Pick an awesome programmer"}
       </div>
     </div>
   );
