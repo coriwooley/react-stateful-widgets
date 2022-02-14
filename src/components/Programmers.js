@@ -30,14 +30,17 @@ export default function Programmers() {
 
   const getNameOfFeatured = () => {
    
-   const programmerName = programmers.find(name => name.id === featured);
-   return programmerName
+   for (let i = 0; i < programmers.length; i++){
+     if (programmers[i].id === featured) {
+       return programmers[i].name
+     }
+   }
   };
 
   const style = {
     fontSize: "1.5em",
     marginTop: "0.5em",
-    color: "royalblue",
+    color: featured ? "gold" : "royalblue",
   };
 
   return (
@@ -46,7 +49,7 @@ export default function Programmers() {
       <div className="programmers">
         {programmers.map((dev) => (
           <div className="programmer" key={dev.id}>
-            {dev.name}{" "}
+            {dev.name}
             <button
               onClick={() => {
                 setFeatured(dev.id);
