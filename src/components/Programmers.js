@@ -41,7 +41,7 @@ export default function Programmers() {
   const style = {
     fontSize: '1.5em',
     marginTop: '0.5em',
-    color: 'royalblue', // 🤔 color turns to gold, when celebrating
+    color: 'royalblue', 
   };
 
   return (
@@ -49,9 +49,7 @@ export default function Programmers() {
       <h2>Programmers</h2>
       <div className='programmers'>
         {
-          /* Nasty bug! We should map over a slice of state, instead of 'listOfAwesome'.
-          We might think: "it works, though!" But if the list of programmers is not state,
-          we could never add or edit programmers in the future. The list would be a static thing." */
+         
           programmers.map(dev =>
             <div className='programmer' key={dev.id}>
               {dev.name} <button onClick={() => { setFeatured(dev.id) }}>Feature</button>
@@ -61,9 +59,7 @@ export default function Programmers() {
       </div>
       <div id='featured' style={style}>
         {
-          // Ternaries are fantastic to render "one thing or the other" depending on the "truthiness" of something.
-          // Pseudo-code: if the currently featured id is truthy render text 1, otherwise render text 2.
-          // Replace the hard-coded false with the correct variable.
+          
           featured
             ? `🎉 Let's celebrate ${getNameOfFeatured()}! 🥳`
             : 'Pick an awesome programmer'
